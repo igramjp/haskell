@@ -57,6 +57,11 @@ head' :: [a] -> a
 head' [] = error "Can't call head on an empty list, dummy!"
 head' (x : _) = x
 
+head'' :: [a] -> a
+head'' xs = case xs of
+  [] -> error "No head for empty lists!"
+  (x : _) -> x
+
 tell :: (Show a) => [a] -> String
 tell [] = "The list is empty"
 tell (x : []) = "The list has one element: " ++ show x
@@ -125,3 +130,17 @@ cylinder r h =
   let sideArea = 2 * pi * r * h
       topArea = pi * r ^ 2
    in sideArea + 2 * topArea
+
+describeList :: [a] -> String
+describeList ls =
+  "The list is " ++ case ls of
+    [] -> "empty."
+    [_] -> "a singleton list."
+    _ -> "a longer lists."
+
+describeList' :: [a] -> String
+describeList' ls = "The list is " ++ what ls
+  where
+    what [] = "empty."
+    what [_] = "a singleton list."
+    what _ = "a longer list."
